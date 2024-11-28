@@ -2,6 +2,8 @@
 # Copyright SCRIPT TACTICS LLC
 #
 from misb_0601_19.uas_datalink_local_set import UasDatalinkLocalSet
+from misb_0601_19 import uas_datalink_local_set
+from ..packet.packet import Packet
 
 
 def parse_key_name(key):
@@ -16,12 +18,10 @@ def parse_fields(value, idx):
         return []
 
     key = value[idx]
-    # key_name = parse_key_name(key)
     length = value[idx + 1] if idx + 1 < len(value) else 0
-    data = int.from_bytes(
-        value[idx + 2 : idx + 2 + length], byteorder="big", signed=True
-    )
-    current_result = (key, length, data)
+    data = value[idx + 2 : idx + 2 + length]
+
+    current_result = uas_datalink_local_set.parse_class(key, length, data)
     remaining_values = parse_fields(value=value, idx=(idx + 2 + length))
     return [current_result] + remaining_values
 
@@ -33,7 +33,7 @@ def parse_value(value):
 
 
 # Define a helper function to extract KLV data based on the Key-Length-Value format (16-byte key)
-def parse_klv(data):
+def parse_klv(data) -> Packet:
     idx = 0
 
     data_len = len(data)
