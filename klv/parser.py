@@ -33,7 +33,7 @@ def parse_value(value):
 
 
 # Define a helper function to extract KLV data based on the Key-Length-Value format (16-byte key)
-def parse_klv(data) -> Packet:
+def parse_klv(data) -> list[Packet]:
     idx = 0
 
     data_len = len(data)
