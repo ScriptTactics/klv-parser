@@ -21,6 +21,9 @@ class Metadata:
     def data_to_unsigned_int(self, data):
         return int.from_bytes(data, byteorder="big", signed=False)
 
+    def data_to_str(self, data):
+        return data.decode("utf-8")
+
     def __str__(self):
         return f"{self.key_type}={self.key_id}, Length={self.length}, Data={self.format_data(self.data)}"
 
@@ -1078,6 +1081,7 @@ class DensityAltitudeExtended(Metadata):
 
 # TODO IMAPB(-900,40000, Length, Soft_val)
 
+
 # Item 104
 class SensorEllipsoidHeightExtended(Metadata):
     def __init__(self, data):
@@ -1086,3 +1090,306 @@ class SensorEllipsoidHeightExtended(Metadata):
 
 
 # TODO IMAPB(-900,40000, Length, Soft_val)
+
+
+# Item 105
+class AlternatePlatformEllipsoidHeightExtended(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_ELLIPSOID_HEIGHT_EXTENDED
+
+
+# TODO IMAPB(-900,40000, Length, Soft_val)
+
+
+# Item 106
+class StreamDesignator(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.STREAM_DESIGNATOR
+        
+# Item 107
+class OperationalBase(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.OPERATIONAL_BASE
+
+# Item 108
+class BroadcastSource(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.BROADCAST_SOURCE
+
+    def format_data(self, data):
+        return self.data_to_str(data)
+
+
+# Item 109
+class RangeToRecoveryLocation(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.RANGE_TO_RECOVERY_LOCATION
+
+
+# Item 110
+class TimeAirborne(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.TIME_AIRBORNE
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 111
+class PropulsionUnitSpeed(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PROPULSION_UNIT_SPEED
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 112
+class PlatformCourseAngle(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_COURSE_ANGLE
+
+
+# Item 113
+class AltitudeAGL(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTITUDE_AGL
+
+
+# Item 114
+class RadarAltimeter(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.RADAR_ALTIMITER
+
+
+# Item 115
+class ControlCommand(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CONTROL_COMMAND
+
+
+# Item 116
+class ControlCommandVerificationList(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CONTROL_COMMAND_VERIFICATION_LIST
+
+
+# Item 117
+class SensorAzimuthRate(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_AZIMUTH_RATE
+
+
+# Item 118
+class SensorElevationRate(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_ELEVATION_RATE
+
+
+# Item 119
+class SensorRollRate(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_ROLL_RATE
+
+
+# Item 120
+class OnBoardMiStoragePercentageFull(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ON_BOARD_MI_STORAGE_PERCENT_FULL
+
+
+# Item 121
+class ActiveWavelengthList(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ACTIVE_WAVELENGTH_LIST
+
+
+# Item 122
+class CountryCodes(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.COUNTRY_CODES
+
+
+# Item 123
+class NumberOfNAVSATSInView(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.NUMBER_OF_NAVSATS_IN_VIEW
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 124
+class PositioningMethodSource(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.POSITIONING_METHOD_SOURCE
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 125
+class PlatformStatus(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_STATUS
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 126
+class SensorControlMode(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_CONTROL_MODE
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 127
+class SensorFrameRatePack(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_FRAME_RATE_PACK
+
+
+# Item 128
+class WavelengthsList(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.WAVELENGTHS_LIST
+
+
+# Item 129
+class TargetID(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.TARGET_ID
+
+
+# Item 130
+class AirbaseLocations(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.AIR_BASE_LOCATIONS
+
+
+# Item 131
+class TakeOffTime(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.TAKE_OFF_TIME
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 132
+class TransmissionFrequency(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.TRANSMISSION_FREQUENCY
+
+
+# Item 133
+class OnBoardMIStorageCapacity(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ON_BOARD_MI_STORAGE_CAPACITY
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 134
+class ZoomPercentage(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ZOOM_PERCENTAGE
+
+
+# TODO IMAPB(0,100.0, Length, Soft val)
+
+
+# Item 135
+class CommunicationsMethod(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.COMMUNICATIONS_METHOD
+
+
+# Item 136
+class LeapSeconds(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.LEAP_SECONDS
+
+    def format_data(self, data):
+        return self.data_to_signed_int(data)
+
+
+# Item 137
+class CorrectionOffset(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORRECTION_OFFSET
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 138
+class PayloadList(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PAYLOAD_LIST
+
+
+# Item 139
+class ActivePayloads(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ACTIVE_PAYLOADS
+
+
+# Item 140
+class WeaponStores(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.WEAPON_STORES
+
+
+# Item 141
+class WaypointList(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.WAYPOINT_LIST
+
+
+# Item 142
+class ViewDomain(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.VIEW_DOMAIN
