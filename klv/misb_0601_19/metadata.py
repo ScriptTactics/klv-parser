@@ -567,3 +567,522 @@ class AirfieldBarometricPressure(Metadata):
 
     def format_data(self, data):
         return (5000 / 65535) * self.data_to_unsigned_int(data)
+
+
+# Item 54
+class AirfieldElevation(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.AIRFIELD_ELEVATION
+
+    def format_data(self, data):
+        return (19900 / 65535) * self.data_to_unsigned_int(data) - 900
+
+
+# Item 55
+class RelativeHumidity(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.RELATIVE_HUMIDITY
+
+    def format_data(self, data):
+        return (100 / 255) * self.data_to_signed_int(data)
+
+
+# Item 56
+class PlatformGroundSpeed(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_GROUND_SPEED
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 57
+class GroundRange(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.GROUND_RANGE
+
+    def format_data(self, data):
+        return (5000000 / 4294967295) * self.data_to_unsigned_int(data)
+
+
+# Item 58
+class PlatformFuelRemaining(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_FUEL_REMAINING
+
+    def format_data(self, data):
+        return (10000 / 65535) * self.data_to_unsigned_int(data)
+
+
+# Item 59
+class PlatformCallSign(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_CALL_SIGN
+
+
+# Item 60
+class WeaponLoad(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.WEAPON_LOAD
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 61
+class WeaponFired(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.WEAPON_FIRED
+
+
+# Item 62
+class LaserPRFCode(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.LASER_PRF_CODE
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 63
+class SensorFieldOfViewName(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_FIELD_OF_VIEW_NAME
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 64
+class PlatformMagneticHeading(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_MAGNETIC_HEADING
+
+    def format_data(self, data):
+        return (360 / 65535) * self.data_to_unsigned_int(data)
+
+
+# Item 65
+class UASDatalinkLSVersionNumber(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.UAS_DATALINK_LS_VERSION_NUMBER
+
+
+# Item 66
+class Deprecated(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.DEPRECATED
+
+
+# Item 67
+class AlternatePlatformLatitude(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_LATITUDE
+
+    def format_data(self, data):
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 68
+class AlternatePlatformLongitude(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_LONGITUDE
+
+    def format_data(self, data):
+        return (360 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 69
+class AlternatePlatformAltitude(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_ALTITUDE
+
+    def format_data(self, data):
+        return (19900 / 65535) * self.data_to_unsigned_int(data) - 900
+
+
+# Item 70
+class AlternatePlatformName(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_NAME
+
+
+# Item 71
+class AlternatePlatformHeading(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_HEADING
+
+    def format_data(self, data):
+        return (360 / 65535) * self.data_to_signed_int(data)
+
+
+# Item 72
+class EventStartTime(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.EVENT_START_TIME
+
+    def format_data(self, data):
+        return self.data_to_unsigned_int(data)
+
+
+# Item 73
+class RTVLocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.RTV_LOCAL_SET
+
+
+# TODO See MISB ST 0806
+
+
+# Item 74
+class VMTILocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.VMTI_LOCAL_SET
+
+
+# TODO See MISB ST 0903
+
+
+# Item 75
+class SensorEllipsoidHeight(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_ELLIPSOID_HEIGHT
+
+    def format_data(self, data):
+        return (19900 / 65535) * self.data_to_unsigned_int(data) - 900
+
+
+# Item 76
+class AlternatePlatformEllipsoidHeigh(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_ELLIPSOID_HEIGHT
+
+    def format_data(self, data):
+        return (19900 / 65535) * self.data_to_unsigned_int(data) - 900
+
+
+# Item 77
+class OperationalMod(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.OPERATIONAL_MODE
+
+
+# Item 78
+class FrameCenterHeightAboveEllipsoid(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.FRAME_CENTER_HEIGHT_ABOVE_ELLIPSOID
+
+    def format_data(self, data):
+        return (19900 / 65535) * self.data_to_unsigned_int(data) - 900
+
+
+# Item 79
+class SensorNorthVelocity(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_NORTH_VELOCITY
+
+    def format_data(self, data):
+        if data == 8000:
+            return "Out of Range"
+        return (654 / 65534) * self.data_to_signed_int(data)
+
+
+# Item 80
+class SensorEastVelocity(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_EAST_VELOCITY
+
+    def format_data(self, data):
+        if data == 8000:
+            return "Out of Range`"
+        return (654 / 65534) * self.data_to_signed_int(data)
+
+
+# Item 81
+class ImageHorizonPixelPack(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.IMAGE_HORIZON_PIXEL_PACK
+
+
+# TODO Read Docs
+
+
+# Item 82
+class CornerLatitudePoint1Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LATITUDE_POINT_1_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 83
+class CornerLongitudePoint1Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_1_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (360 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 84
+class CornerLatitudePoint2Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_2_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 85
+class CornerLongitudePoint2Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_2_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (360 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 86
+class CornerLatitudePoint3Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_3_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 87
+class CornerLongitudePoint3Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_3_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (360 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 88
+class CornerLatitudePoint4Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_4_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 89
+class CornerLongitudePoint4Full(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_4_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "N/A (Off-Earth)"
+        return (360 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 90
+class PlatformPitchAngleFull(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_PITCH_ANGLE_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "Out of Range"
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 91
+class PlatformRollAngleFull(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_ROLL_ANGLE_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "Out of Range"
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 92
+class PlatformAngleOfAttackFull(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_ANGLE_OF_ATTACK_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "Out of Range"
+        return (180 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 93
+class PlatformSideslipAngleFull(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.PLATFORM_SIDESLIP_ANGLE_FULL
+
+    def format_data(self, data):
+        if data == 80000000:
+            return "Out of Range"
+        return (360 / 4294967294) * self.data_to_signed_int(data)
+
+
+# Item 94
+class MIISCoreIdentifier(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.MIIS_CORE_IDENTIFIER
+
+
+# TODO MISB ST 1204
+
+
+# Item 95
+class SARMotionImageryLocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SAR_MOTION_IMAGERY_SET
+
+
+# TODO MISB ST 1206
+
+
+# Item 96
+class TargetWidthExtended(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.TARGET_WIDTH_EXTENDED
+
+
+# TODO IMAPB(0,1500000, Length, Soft_val)
+
+
+# Item 97
+class RangeImageLocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.RANGE_IMAGE_LOCAL_SET
+
+
+# TODO MISB ST 1002
+
+
+# Item 98
+class GeoRegistratoinLocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.GEO_REGISTRATION_LOCAL_SET
+
+
+# TODO MISB ST 1601
+
+
+# Item 99
+class CompositeImagingLocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.COMPOSITE_IMAGING_LOCAL_SET
+
+
+# TODO MISB ST 1602
+
+
+# Item 100
+class SegmentLocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SEGMENT_LOCAL_SET
+
+
+# TODO MISB ST 1607
+
+
+# Item 101
+class AmendLocalSet(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.AMEND_LOCAL_SET
+
+
+# TODO MISB ST 1607
+
+
+# Item 102
+class SDCCFLP(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SDCC_FLP
+
+
+# TODO MISB ST 1010
+
+
+# Item 103
+class DensityAltitudeExtended(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.DENSITY_ALTITUDE_EXTENDED
+
+
+# TODO IMAPB(-900,40000, Length, Soft_val)
+
+# Item 104
+class SensorEllipsoidHeightExtended(Metadata):
+    def __init__(self, data):
+        super().__init__(data)
+        self.key_type = UasDatalinkLocalSet.SENSOR_ELLIPSOID_HEIGHT_EXTENDED
+
+
+# TODO IMAPB(-900,40000, Length, Soft_val)
