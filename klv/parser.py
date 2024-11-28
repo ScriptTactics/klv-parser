@@ -26,14 +26,14 @@ def parse_fields(value, idx):
     return [current_result] + remaining_values
 
 
-def parse_value(value):
-    parsed_value = []
-    parsed_value.append(parse_fields(value=value, idx=0))
-    return parsed_value
+def parse_value(value) -> Packet:
+    # parsed_value = []
+    # parsed_value.append(parse_fields(value=value, idx=0))
+    return Packet(parse_fields(value=value, idx=0))
 
 
 # Define a helper function to extract KLV data based on the Key-Length-Value format (16-byte key)
-def parse_klv(data) -> list[Packet]:
+def parse_klv(data) -> Packet:
     idx = 0
 
     data_len = len(data)
