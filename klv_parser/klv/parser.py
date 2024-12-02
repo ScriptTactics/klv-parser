@@ -21,9 +21,8 @@ def parse_class(
 ):
     key_name = parse_key_name(key)
     if key_name in metadata.class_map:
-        logger.info(f"key_name:{key_name} in metadata.class_map")
+        logger.debug(f"key_name:{key_name} in metadata.class_map")
         metadata_class = metadata.class_map[key_name]
-        logger.info(metadata_class)
         return metadata_class(data, length, key)
     else:
         logger.info(f"No class found for key_name: {key_name}")
