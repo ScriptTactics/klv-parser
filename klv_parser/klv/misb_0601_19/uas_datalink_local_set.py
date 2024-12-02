@@ -1,6 +1,4 @@
 from enum import Enum
-import metadata
-import inspect
 
 
 class UasDatalinkLocalSet(Enum):
@@ -146,38 +144,3 @@ class UasDatalinkLocalSet(Enum):
     WEAPON_STORES = 140
     WAYPOINT_LIST = 141
     VIEW_DOMAIN = 142
-
-
-def build_class_map():
-    # Find all classes in the current module that are subclasses of Metadata
-    metadata_classes = [
-        cls
-        for _, cls in globals().items()
-        if inspect.isclass(cls)
-        and issubclass(cls, metadata.Metadata)
-        and cls is not metadata.Metadata
-    ]
-
-    # Sort the classes alphabetically by their name (since UasDatalinkLocalSet is ordered)
-    metadata_classes.sort(key=lambda x: x.__name__)
-
-    # Create a mapping of Enum members to corresponding classes
-    return {
-        enum_member: cls
-        for enum_member, cls in zip(UasDatalinkLocalSet, metadata_classes)
-    }
-
-
-def parse_class(key, data, length):
-    class_map = build_class_map()  # Dynamically build the class map
-
-    # Find the enum corresponding to the key
-    enum_member = next(
-        (enum for enum in UasDatalinkLocalSet if enum.value == key), None
-    )
-    if enum_member is not None and enum_member in class_map:
-        # Instantiate the appropriate Metadata subclass
-        metadata_class = class_map[enum_member]
-        return metadata_class(data, length, key)
-
-    return None

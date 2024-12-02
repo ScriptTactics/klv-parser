@@ -1,4 +1,4 @@
-from klv.misb_0601_19.metadata import Metadata
+from ..klv.misb_0601_19.metadata import Metadata
 
 
 class Packet:

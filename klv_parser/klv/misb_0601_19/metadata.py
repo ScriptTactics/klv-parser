@@ -1,4 +1,4 @@
-from uas_datalink_local_set import UasDatalinkLocalSet
+from .uas_datalink_local_set import UasDatalinkLocalSet
 
 _OUT_OF_RANGE_STR = "Out of Range"
 
