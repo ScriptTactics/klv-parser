@@ -73,7 +73,7 @@ class PlatformPitchAngle(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_PITCH_ANGLE
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return _OUT_OF_RANGE_STR
         return 40 / 65534 * self.data_to_signed_int(self.data)
 
@@ -85,7 +85,7 @@ class PlatformRollAngle(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_ROLL_ANGLE
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return _OUT_OF_RANGE_STR
         return (1000 / 65534) * self.data_to_signed_int(self.data)
 
@@ -138,7 +138,7 @@ class SensorLatitude(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_LATITUDE
 
     def format_data(self):
-        if data.hex() == 80000000:
+        if self.data.hex() == 80000000:
             return "Reserved"
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -150,7 +150,7 @@ class SensorLongitude(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_LONGITUDE
 
     def format_data(self):
-        if data.hex() == 80000000:
+        if self.data.hex() == 80000000:
             return "Reserved"
         return (306 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -202,7 +202,7 @@ class SensorRelativeElevationAngle(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_RELATIVE_ELEVATION_ANGLE
 
     def format_data(self):
-        if data.hex() == 80000000:
+        if self.data.hex() == 80000000:
             return "Reserved"
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -244,7 +244,7 @@ class FrameCenterLatitude(Metadata):
         self.key_type = UasDatalinkLocalSet.FRAME_CENTER_LATITUDE
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -256,7 +256,7 @@ class FrameCenterLongitude(Metadata):
         self.key_type = UasDatalinkLocalSet.FRAME_CENTER_LONGITUDE
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -279,7 +279,7 @@ class OffsetCornerLatitudePoint1Conversion(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LATITUDE_POINT_1
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -291,7 +291,7 @@ class OffsetCornerLongitudePoint1Conversion(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LONGITUDE_POINT_1
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -303,7 +303,7 @@ class OffsetCornerLatitudePoint2(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LATITUDE_POINT_2
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -315,7 +315,7 @@ class OffsetCornerLongitudePoint2(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LONGITUDE_POINT_2
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -327,7 +327,7 @@ class OffsetCornerLatitudePoint3(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LATITUDE_POINT_3
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -339,7 +339,7 @@ class OffsetCornerLongitudePoint3(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LONGITUDE_POINT_3
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -351,7 +351,7 @@ class OffsetCornerLatitudePoint4(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LATITUDE_POINT_4
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -363,7 +363,7 @@ class OffsetCornerLongitudePoint4(Metadata):
         self.key_type = UasDatalinkLocalSet.OFFSET_CORNER_LONGITUDE_POINT_4
 
     def format_data(self):
-        if data.hex() == 8000:
+        if self.data.hex() == 8000:
             return "N/A (Off-Earth)"
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
@@ -432,7 +432,7 @@ class TargetLocationLatitude(Metadata):
         self.key_type = UasDatalinkLocalSet.TARGET_LOCATION_LATITUDE
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -444,7 +444,7 @@ class TargetLocationLongitude(Metadata):
         self.key_type = UasDatalinkLocalSet.TARGET_LOCATION_LONGITUDE
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -537,7 +537,7 @@ class PlatformAngleOfAttack(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_ANGLE_OF_ATTACK
 
     def format_data(self):
-        if data == 8000:
+        if self.data == 8000:
             return _OUT_OF_RANGE_STR
         return (40 / 65534) * self.data_to_signed_int(self.data)
 
@@ -549,7 +549,7 @@ class PlatformVerticalSpeed(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_VERTICAL_SPEED
 
     def format_data(self):
-        if data == 8000:
+        if self.data == 8000:
             return _OUT_OF_RANGE_STR
         return (360 / 65534) * self.data_to_signed_int(self.data)
 
@@ -561,7 +561,7 @@ class PlatformSideslipAngle(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_SIDESLIP_ANGLE
 
     def format_data(self):
-        if data == 8000:
+        if self.data == 8000:
             return _OUT_OF_RANGE_STR
         return (40 / 65534) * self.data_to_signed_int(self.data)
 
@@ -815,7 +815,7 @@ class SensorNorthVelocity(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_NORTH_VELOCITY
 
     def format_data(self):
-        if data == 8000:
+        if self.data == 8000:
             return _OUT_OF_RANGE_STR
         return (654 / 65534) * self.data_to_signed_int(self.data)
 
@@ -827,7 +827,7 @@ class SensorEastVelocity(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_EAST_VELOCITY
 
     def format_data(self):
-        if data == 8000:
+        if self.data == 8000:
             return "Out of Range`"
         return (654 / 65534) * self.data_to_signed_int(self.data)
 
@@ -849,7 +849,7 @@ class CornerLatitudePoint1Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LATITUDE_POINT_1_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -861,7 +861,7 @@ class CornerLongitudePoint1Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_1_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -873,7 +873,7 @@ class CornerLatitudePoint2Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_2_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -885,7 +885,7 @@ class CornerLongitudePoint2Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_2_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -897,7 +897,7 @@ class CornerLatitudePoint3Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_3_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -909,7 +909,7 @@ class CornerLongitudePoint3Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_3_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -921,7 +921,7 @@ class CornerLatitudePoint4Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_4_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -933,7 +933,7 @@ class CornerLongitudePoint4Full(Metadata):
         self.key_type = UasDatalinkLocalSet.CORNER_LONGITUDE_POINT_4_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return "N/A (Off-Earth)"
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -945,7 +945,7 @@ class PlatformPitchAngleFull(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_PITCH_ANGLE_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return _OUT_OF_RANGE_STR
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -957,7 +957,7 @@ class PlatformRollAngleFull(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_ROLL_ANGLE_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return _OUT_OF_RANGE_STR
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -969,7 +969,7 @@ class PlatformAngleOfAttackFull(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_ANGLE_OF_ATTACK_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return _OUT_OF_RANGE_STR
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
@@ -981,7 +981,7 @@ class PlatformSideslipAngleFull(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_SIDESLIP_ANGLE_FULL
 
     def format_data(self):
-        if data == 80000000:
+        if self.data == 80000000:
             return _OUT_OF_RANGE_STR
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
