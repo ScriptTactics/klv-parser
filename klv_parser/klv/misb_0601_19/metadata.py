@@ -152,7 +152,7 @@ class SensorLongitude(Metadata):
     def format_data(self):
         if self.data.hex() == 80000000:
             return "Reserved"
-        return (306 / 4294967294) * self.data_to_signed_int(self.data)
+        return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
 # Item 15
