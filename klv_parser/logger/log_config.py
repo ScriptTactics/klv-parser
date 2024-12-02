@@ -23,7 +23,7 @@ def setup_logger():
 
     # Create a rotating file handler
     rotating_handler = RotatingFileHandler(
-        f"{log_dir}/klvpy",
+        f"{log_dir}/klvpy.log",
         maxBytes=LOGGER_MAX_BYTES,
         backupCount=BACKUP_COUNT,
     )  # Log file will rotate after 5MB, keeping 3 backups
