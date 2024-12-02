@@ -2,7 +2,7 @@
 # Copyright SCRIPT TACTICS LLC
 #
 from .misb_0601_19 import uas_datalink_local_set
-from .misb_0601_19 import util
+from .misb_0601_19 import metadata
 from ..packet.packet import Packet
 from ..logger.log_config import logger
 
@@ -14,6 +14,22 @@ def parse_key_name(key):
     return None
 
 
+def parse_class(
+    key,
+    length,
+    data,
+):
+    key_name = parse_key_name(key)
+    if key_name in metadata.class_map:
+        logger.info(f"key_name:{key_name} in metadata.class_map")
+        metadata_class = metadata.class_map[key_name]
+        logger.info(metadata_class)
+        return metadata_class(data, length, key)
+    else:
+        logger.info(f"No class found for key_name: {key_name}")
+        return None
+
+
 def parse_fields(value, idx):
     if idx >= len(value):
         return []
@@ -22,19 +38,13 @@ def parse_fields(value, idx):
     length = value[idx + 1] if idx + 1 < len(value) else 0
     data = value[idx + 2 : idx + 2 + length]
 
-    current_result = util.parse_class(key, length, data)
+    current_result = parse_class(key, length, data)
     remaining_values = parse_fields(value=value, idx=(idx + 2 + length))
     return [current_result] + remaining_values
 
 
 def parse_packet(value) -> Packet:
     return Packet(parse_fields(value=value, idx=0))
-
-
-# def parse_length(data, length_indicator, idx, data_len):
-#     value = 0
-
-#     return value
 
 
 # Define a helper function to extract KLV data based on the Key-Length-Value format (16-byte key)
