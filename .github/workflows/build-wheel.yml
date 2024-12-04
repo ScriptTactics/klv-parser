@@ -1,0 +1,53 @@
+name: Build Python Wheel
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-wheel:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }} # Specify the desired Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel build
+
+      - name: Build the wheel
+        run: python -m build --wheel
+
+      - name: Generate SHA256 hash of the wheel file
+        run: |
+          # Find the wheel file
+          WHEEL_FILE=$(find dist -name "*.whl")
+          # Generate SHA256 hash
+          SHA256_HASH=$(sha256sum $WHEEL_FILE | awk '{print $1}')
+          echo "SHA256 Hash: $SHA256_HASH"
+          # Save the hash to a file
+          echo "$SHA256_HASH" > hash.txt
+
+      - name: Upload hash as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hash
+          path: hash.txt
+          overwrite: true
+
+      - name: Upload wheel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: klvpy
+          path: dist/*.whl
+          overwrite: true
