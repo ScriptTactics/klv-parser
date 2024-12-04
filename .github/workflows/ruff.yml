@@ -27,4 +27,3 @@ jobs:
         args: check
         # Whether to only run Ruff on changed files. Defaults to `false`.
         changed-files: True
-              

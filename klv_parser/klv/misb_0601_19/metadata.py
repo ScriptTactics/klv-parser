@@ -1,6 +1,4 @@
 from .uas_datalink_local_set import UasDatalinkLocalSet
-from ...logger.log_config import logger
-import inspect
 
 _OUT_OF_RANGE_STR = "Out of Range"
 
@@ -1127,7 +1125,7 @@ class BroadcastSource(Metadata):
         self.key_type = UasDatalinkLocalSet.BROADCAST_SOURCE
 
     def format_data(self):
-        return self.data_to_str(data)
+        return self.data_to_str(self.data)
 
 
 # Item 109
