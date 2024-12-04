@@ -1,29 +1,61 @@
-name: Publish
+name: Create Release with Artifacts
 
 on:
   push:
     tags:
-      - "*"
+      - '*'  # Triggers when a tag starting with 'v' is pushed (e.g., v1.0.0)
+
+permissions:
+  contents: write
 
 jobs:
-  build:
-    name: Publish binaries
+  build-and-release:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/download-artifact@v4
+      # Step 1: Check out the code from the repository
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python (Optional, adjust for other environments if needed)
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          name: yolo_tak
-          path: dist/*.whl
-      - uses: actions/download-artifact@v4
+          python-version: '3.x'
+
+      # Step 3: Install dependencies and build artifacts
+      - name: Install dependencies and build artifacts
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build
+          python -m build  # Creates artifacts in the 'dist/' directory
+
+      # Step 4: Upload artifacts to GitHub release
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
         with:
-          name: hash.txt
-          path: hash.txt
-      - name: Upload Release Asset to GitHub
-        id: upload-release-asset
-        uses: svenstaro/upload-release-action@v2
+          tag_name: ${{ github.ref }}  # Tag that triggered the workflow
+          release_name: Release ${{ github.ref }}  # Name of the release
+          draft: true  # Set to true if you want to create it as a draft
+          prerelease: false  # Set to true if it's a pre-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Provided automatically by GitHub
+
+      # Step 5: Upload artifacts to the created release
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/*.deb
-          tag: ${{ github.ref }}
-          overwrite: true
-          file_glob: true
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/*.tar.gz  # Adjust according to your build output
+          asset_name: klv_py-${{ github.ref }}.tar.gz
+          asset_content_type: application/gzip
+
+      # Optionally, upload additional assets (like wheels)
+      - name: Upload additional asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/*.whl
+          asset_name: klv_py-${{ github.ref }}.whl
+          asset_content_type: application/zip
