@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "klv_py"
+version = "0.1.1"
+description = "MISB 601 KLV Parser"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.10, <4"
+license = { text = "Proprietary" }
+maintainers = [
+    { name = "SCRIPT TACTICS LLC", email = "contact-project+script-tactics-klvpy-65068562-issue-@incoming.gitlab.com" },
+]
+keywords = [
+    "Cursor on Target",
+    "CoT",
+    "ATAK",
+    "TAK",
+    "WinTAK",
+    "TAK",
+    "TAK Server",
+    "KLV",
+    "UAS",
+]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+homepage = "https://github.com/ScriptTactics/klv_py"
+"CI: GitHub Actions" = "https://github.com/ScriptTactics/klv_py/actions"
+"GitHub: issues" = "https://github.com/ScriptTactics/klv_py/issues"
+"GitHub: repo" = "https://github.com/ScriptTactics/klv_py"
+
+[tool.setuptools.packages.find]
+include = ["*"]
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F"]           # Default rules for Ruff
+ignore = ["E203"]             # Ignore specific rules
+extend-ignore = []            # Additional rules to ignore if needed
+target-version = "py310"      # Adjust based on your project's Python version
+unfixable = []                # Optionally specify rules Ruff should not attempt to fix
+exclude = ["build/", "dist/"] # Exclude specific directories or files
