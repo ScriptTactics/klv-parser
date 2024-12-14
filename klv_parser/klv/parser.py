@@ -54,7 +54,7 @@ def parse_klv(data) -> Packet:
     while idx < data_len:
         # Ensure there is enough data for the key (16 bytes) and the length byte
         if idx + 16 > data_len:
-            print("Incomplete key, skipping packet")
+            logger.info("Incomplete key, skipping packet")
             break
 
         # Extract the 16-byte key
@@ -62,7 +62,7 @@ def parse_klv(data) -> Packet:
 
         # Ensure there's enough data for the length byte and the value
         if idx >= data_len:
-            print("Incomplete length field, skipping packet")
+            logger.info("Incomplete length field, skipping packet")
             break
 
         # Extract the length indicator
@@ -76,7 +76,7 @@ def parse_klv(data) -> Packet:
 
             # Check if there are enough bytes for the length encoding
             if idx + length_of_length_field > data_len:
-                print("Incomplete long-form length, skipping packet")
+                logger.info("Incomplete long-form length, skipping packet")
                 return None
 
             # Now get the actual length, which spans the next 'length_of_length_field' bytes
@@ -89,7 +89,7 @@ def parse_klv(data) -> Packet:
 
             # Ensure there's enough data for the value
             if idx + length > data_len:
-                print("Incomplete value, skipping packet")
+                logger.info("Incomplete value, skipping packet")
                 return None
 
             value = data[idx : idx + length]
@@ -101,7 +101,7 @@ def parse_klv(data) -> Packet:
 
         # Ensure there's enough data for the value
         if idx + length > data_len:
-            print("Incomplete value, skipping packet")
+            logger.info("Incomplete value, skipping packet")
             return None
 
         value = data[idx : idx + length]
