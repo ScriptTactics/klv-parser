@@ -8,7 +8,7 @@ version = "0.1.1"
 description = "MISB 601 KLV Parser"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.10, <4"
-license = { text = "Proprietary" }
+license = { text = "MIT" }
 maintainers = [
     { name = "SCRIPT TACTICS LLC", email = "contact-project+script-tactics-klvpy-65068562-issue-@incoming.gitlab.com" },
 ]
