@@ -1,0 +1,9 @@
+# Exclude files from a directory
+exclude .pre-commit-config.yaml
+exclude .gitignore
+exclude README.md
+exclude dev.ini
+exclude .github/*
+exclude .ruff_cache
+exclude logs/*
+exclude .vscode/*
