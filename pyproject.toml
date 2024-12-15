@@ -47,10 +47,8 @@ include = ["*"]
 profile = "black"
 
 [tool.ruff]
-line-length = 88
-select = ["E", "F"]           # Default rules for Ruff
-ignore = ["E203"]             # Ignore specific rules
-extend-ignore = []            # Additional rules to ignore if needed
+line-length = 120
+lint.select = ["E", "F"]           # Default rules for Ruff
+lint.ignore = ["E203"]             # Ignore specific rules
 target-version = "py310"      # Adjust based on your project's Python version
-unfixable = []                # Optionally specify rules Ruff should not attempt to fix
 exclude = ["build/", "dist/"] # Exclude specific directories or files

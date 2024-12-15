@@ -1,6 +1,3 @@
-#
-# Copyright SCRIPT TACTICS LLC
-#
 from .misb_0601_19 import uas_datalink_local_set
 from .misb_0601_19 import metadata
 from ..packet.packet import Packet
@@ -82,9 +79,7 @@ def parse_klv(data) -> Packet:
             # Now get the actual length, which spans the next 'length_of_length_field' bytes
             length = 0
             for _ in range(length_of_length_field):
-                length = (length << 8) | data[
-                    idx
-                ]  # Shift and add the next byte to length
+                length = (length << 8) | data[idx]  # Shift and add the next byte to length
                 idx += 1
 
             # Ensure there's enough data for the value
