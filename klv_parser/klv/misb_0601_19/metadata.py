@@ -12,10 +12,8 @@ class Metadata:
 
     def format_data(self):
         if self.key_type in {}:
-            raise NotImplementedError(
-                "Each UasDatalinkLocalSet must implement its own format_data() function"
-            )
-        return self.data_to_signed_int(self.data)
+            raise NotImplementedError("Each UasDatalinkLocalSet must implement its own format_data() function")
+        return self.data
 
     def data_to_signed_int(self, data):
         return int.from_bytes(data, byteorder="big", signed=True)
@@ -27,7 +25,7 @@ class Metadata:
         return data.decode("utf-8")
 
     def __str__(self):
-        return f"{self.key_type}={self.id}, Length={self.length} Data={self.format_data(self.data)}"
+        return f"{self.key_type}={self.id}, Length={self.length} Data={self.format_data(self)}"
 
 
 # Item 2
