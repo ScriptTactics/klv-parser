@@ -25,7 +25,7 @@ class Metadata:
         return data.decode("utf-8")
 
     def __str__(self):
-        return f"{self.key_type}={self.id}, Length={self.length} Data={self.format_data(self)}"
+        return f"{self.key_type}={self.id}, Length={self.length} Data={self.format_data()}"
 
 
 # Item 2
