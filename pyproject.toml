@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "klv_py"
+name = "klv_parer"
 version = "0.1.1"
 description = "MISB 601 KLV Parser"
 readme = { file = "README.md", content-type = "text/markdown" }
@@ -35,10 +35,10 @@ classifiers = [
 ]
 
 [project.urls]
-homepage = "https://github.com/ScriptTactics/klv_py"
-"CI: GitHub Actions" = "https://github.com/ScriptTactics/klv_py/actions"
-"GitHub: issues" = "https://github.com/ScriptTactics/klv_py/issues"
-"GitHub: repo" = "https://github.com/ScriptTactics/klv_py"
+homepage = "https://github.com/ScriptTactics/klv-parser"
+"CI: GitHub Actions" = "https://github.com/ScriptTactics/klv-parser/actions"
+"GitHub: issues" = "https://github.com/ScriptTactics/klv-parser/issues"
+"GitHub: repo" = "https://github.com/ScriptTactics/klv-parser"
 
 [tool.setuptools.packages.find]
 include = ["*"]
