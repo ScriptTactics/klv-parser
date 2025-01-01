@@ -87,7 +87,7 @@ def has_enough_data_for_length(idx, data_len) -> bool:
     return True
 
 
-def parse_long_form(data, idx, data_len):
+def parse_long_form(data, idx, data_len) -> tuple:
     length_of_length_field = data[idx] & 0x7F  # Get the number of length bytes
     idx += 1  # Move past the first byte
 
@@ -109,7 +109,7 @@ def parse_long_form(data, idx, data_len):
     return value, idx
 
 
-def parse_short_form(data, idx, data_len):
+def parse_short_form(data, idx, data_len) -> tuple:
     length = data[idx] & 0x7F  # Get the last 7 bits
     idx += 1  # Move past the length byte
 
