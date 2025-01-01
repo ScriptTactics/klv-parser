@@ -1,6 +1,7 @@
 from .uas_datalink_local_set import UasDatalinkLocalSet
 
 _OUT_OF_RANGE_STR = "Out of Range"
+_NA_OFF_EARTH = "N/A (Off-Earth)"
 
 
 class Metadata:
@@ -241,7 +242,7 @@ class FrameCenterLatitude(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -253,7 +254,7 @@ class FrameCenterLongitude(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -276,7 +277,7 @@ class OffsetCornerLatitudePoint1Conversion(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -288,7 +289,7 @@ class OffsetCornerLongitudePoint1Conversion(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -300,7 +301,7 @@ class OffsetCornerLatitudePoint2(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -312,7 +313,7 @@ class OffsetCornerLongitudePoint2(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -324,7 +325,7 @@ class OffsetCornerLatitudePoint3(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -336,7 +337,7 @@ class OffsetCornerLongitudePoint3(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -348,7 +349,7 @@ class OffsetCornerLatitudePoint4(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -360,7 +361,7 @@ class OffsetCornerLongitudePoint4(Metadata):
 
     def format_data(self):
         if self.data.hex() == 8000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (0.15 / 65534) * self.data_to_signed_int(self.data)
 
 
@@ -429,7 +430,7 @@ class TargetLocationLatitude(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -441,7 +442,7 @@ class TargetLocationLongitude(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -846,7 +847,7 @@ class CornerLatitudePoint1Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -858,7 +859,7 @@ class CornerLongitudePoint1Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -870,7 +871,7 @@ class CornerLatitudePoint2Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -882,7 +883,7 @@ class CornerLongitudePoint2Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -894,7 +895,7 @@ class CornerLatitudePoint3Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -906,7 +907,7 @@ class CornerLongitudePoint3Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -918,7 +919,7 @@ class CornerLatitudePoint4Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -930,7 +931,7 @@ class CornerLongitudePoint4Full(Metadata):
 
     def format_data(self):
         if self.data == 80000000:
-            return "N/A (Off-Earth)"
+            return _NA_OFF_EARTH
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -1023,7 +1024,7 @@ class RangeImageLocalSet(Metadata):
 
 
 # Item 98
-class GeoRegistratoinLocalSet(Metadata):
+class GeoRegistrationLocalSet(Metadata):
     def __init__(self, data, length, id):
         super().__init__(data, length, id)
         self.key_type = UasDatalinkLocalSet.GEO_REGISTRATION_LOCAL_SET
@@ -1171,7 +1172,7 @@ class AltitudeAGL(Metadata):
 class RadarAltimeter(Metadata):
     def __init__(self, data, length, id):
         super().__init__(data, length, id)
-        self.key_type = UasDatalinkLocalSet.RADAR_ALTIMITER
+        self.key_type = UasDatalinkLocalSet.RADAR_ALTIMETER
 
 
 # Item 115
@@ -1501,7 +1502,7 @@ class_map = {
     UasDatalinkLocalSet.SAR_MOTION_IMAGERY_SET: SARMotionImageryLocalSet,
     UasDatalinkLocalSet.TARGET_WIDTH_EXTENDED: TargetWidthExtended,
     UasDatalinkLocalSet.RANGE_IMAGE_LOCAL_SET: RangeImageLocalSet,
-    UasDatalinkLocalSet.GEO_REGISTRATION_LOCAL_SET: GeoRegistratoinLocalSet,
+    UasDatalinkLocalSet.GEO_REGISTRATION_LOCAL_SET: GeoRegistrationLocalSet,
     UasDatalinkLocalSet.COMPOSITE_IMAGING_LOCAL_SET: CompositeImagingLocalSet,
     UasDatalinkLocalSet.SEGMENT_LOCAL_SET: SegmentLocalSet,
     UasDatalinkLocalSet.AMEND_LOCAL_SET: AmendLocalSet,
@@ -1517,7 +1518,7 @@ class_map = {
     UasDatalinkLocalSet.PROPULSION_UNIT_SPEED: PropulsionUnitSpeed,
     UasDatalinkLocalSet.PLATFORM_COURSE_ANGLE: PlatformCourseAngle,
     UasDatalinkLocalSet.ALTITUDE_AGL: AltitudeAGL,
-    UasDatalinkLocalSet.RADAR_ALTIMITER: RadarAltimeter,
+    UasDatalinkLocalSet.RADAR_ALTIMETER: RadarAltimeter,
     UasDatalinkLocalSet.CONTROL_COMMAND: ControlCommand,
     UasDatalinkLocalSet.CONTROL_COMMAND_VERIFICATION_LIST: ControlCommandVerificationList,
     UasDatalinkLocalSet.SENSOR_AZIMUTH_RATE: SensorAzimuthRate,

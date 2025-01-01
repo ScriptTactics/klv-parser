@@ -44,63 +44,78 @@ def parse_packet(value) -> Packet:
 
 
 # Define a helper function to extract KLV data based on the Key-Length-Value format (16-byte key)
-def parse_klv(data) -> Packet:
+def parse_klv(data) -> Packet | None:
     idx = 0
-
     data_len = len(data)
+
     while idx < data_len:
-        # Ensure there is enough data for the key (16 bytes) and the length byte
-        if idx + 16 > data_len:
-            logger.info("Incomplete key, skipping packet")
+        if not has_enough_data_for_key(idx, data_len):
             break
 
-        # Extract the 16-byte key
         idx += 16  # Move past key.
 
-        # Ensure there's enough data for the length byte and the value
-        if idx >= data_len:
-            logger.info("Incomplete length field, skipping packet")
+        if not has_enough_data_for_length(idx, data_len):
             break
 
-        # Extract the length indicator
         length_indicator = data[idx] & 0x80  # Check MSB of the first length byte
-        value = b""
 
         if length_indicator:  # Long form (MSB is set)
-            # BER Long format: first byte indicates length of the length field
-            length_of_length_field = data[idx] & 0x7F  # Get the number of length bytes
-            idx += 1  # Move past the first byte
-
-            # Check if there are enough bytes for the length encoding
-            if idx + length_of_length_field > data_len:
-                logger.info("Incomplete long-form length, skipping packet")
-                return None
-
-            # Now get the actual length, which spans the next 'length_of_length_field' bytes
-            length = 0
-            for _ in range(length_of_length_field):
-                length = (length << 8) | data[idx]  # Shift and add the next byte to length
-                idx += 1
-
-            # Ensure there's enough data for the value
-            if idx + length > data_len:
-                logger.info("Incomplete value, skipping packet")
-                return None
-
-            value = data[idx : idx + length]
-            idx += length  # Move past the value
+            value, idx = parse_long_form(data, idx, data_len)
         else:  # Short form (MSB is not set)
-            # BER Short format: length is encoded in the first byte (last 7 bits)
-            length = data[idx] & 0x7F  # Get the last 7 bits
-            idx += 1  # Move past the length byte
+            value, idx = parse_short_form(data, idx, data_len)
 
-        # Ensure there's enough data for the value
-        if idx + length > data_len:
-            logger.info("Incomplete value, skipping packet")
+        if value is None:
             return None
 
-        value = data[idx : idx + length]
         parsed_value = parse_packet(value)
-        idx += length  # Move past the value
+        idx += len(value)  # Move past the value
 
     return parsed_value
+
+
+def has_enough_data_for_key(idx, data_len):
+    if idx + 16 > data_len:
+        logger.info("Incomplete key, skipping packet")
+        return False
+    return True
+
+
+def has_enough_data_for_length(idx, data_len):
+    if idx >= data_len:
+        logger.info("Incomplete length field, skipping packet")
+        return False
+    return True
+
+
+def parse_long_form(data, idx, data_len):
+    length_of_length_field = data[idx] & 0x7F  # Get the number of length bytes
+    idx += 1  # Move past the first byte
+
+    if idx + length_of_length_field > data_len:
+        logger.info("Incomplete long-form length, skipping packet")
+        return None, idx
+
+    length = 0
+    for _ in range(length_of_length_field):
+        length = (length << 8) | data[idx]  # Shift and add the next byte to length
+        idx += 1
+
+    if idx + length > data_len:
+        logger.info("Incomplete value, skipping packet")
+        return None, idx
+
+    value = data[idx : idx + length]
+    idx += length  # Move past the value
+    return value, idx
+
+
+def parse_short_form(data, idx, data_len):
+    length = data[idx] & 0x7F  # Get the last 7 bits
+    idx += 1  # Move past the length byte
+
+    if idx + length > data_len:
+        logger.info("Incomplete value, skipping packet")
+        return None, idx
+
+    value = data[idx : idx + length]
+    return value, idx
