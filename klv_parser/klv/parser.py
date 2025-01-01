@@ -73,14 +73,14 @@ def parse_klv(data) -> Packet | None:
     return parsed_value
 
 
-def has_enough_data_for_key(idx, data_len):
+def has_enough_data_for_key(idx, data_len) -> bool:
     if idx + 16 > data_len:
         logger.info("Incomplete key, skipping packet")
         return False
     return True
 
 
-def has_enough_data_for_length(idx, data_len):
+def has_enough_data_for_length(idx, data_len) -> bool:
     if idx >= data_len:
         logger.info("Incomplete length field, skipping packet")
         return False
