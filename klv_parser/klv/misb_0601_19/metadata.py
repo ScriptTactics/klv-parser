@@ -2,6 +2,11 @@ from .uas_datalink_local_set import UasDatalinkLocalSet
 
 _OUT_OF_RANGE_STR = "Out of Range"
 _NA_OFF_EARTH = "N/A (Off-Earth)"
+_RESERVED = "Reserved"
+
+_OFFSET = 900
+_UINT_RANGE = 65535
+_INT_RANGE = 65534
 
 
 class Metadata:
@@ -12,8 +17,6 @@ class Metadata:
         self.key_type = UasDatalinkLocalSet
 
     def format_data(self):
-        if self.key_type in {}:
-            raise NotImplementedError("Each UasDatalinkLocalSet must implement its own format_data() function")
         return self.data
 
     def data_to_signed_int(self, data):
@@ -72,7 +75,7 @@ class PlatformPitchAngle(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _OUT_OF_RANGE_STR
-        return 40 / 65534 * self.data_to_signed_int(self.data)
+        return 40 / _INT_RANGE * self.data_to_signed_int(self.data)
 
 
 # Item 7
@@ -84,7 +87,7 @@ class PlatformRollAngle(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _OUT_OF_RANGE_STR
-        return (1000 / 65534) * self.data_to_signed_int(self.data)
+        return (100 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 8
@@ -136,7 +139,7 @@ class SensorLatitude(Metadata):
 
     def format_data(self):
         if self.data.hex() == 80000000:
-            return "Reserved"
+            return _RESERVED
         return (180 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -148,7 +151,7 @@ class SensorLongitude(Metadata):
 
     def format_data(self):
         if self.data.hex() == 80000000:
-            return "Reserved"
+            return _RESERVED
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -159,7 +162,7 @@ class SensorTrueAltitude(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_TRUE_ALTITUDE
 
     def format_data(self):
-        return (199000 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (199000 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 16
@@ -169,7 +172,7 @@ class SensorHorizontalFieldOfView(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_HORIZONTAL_FOV
 
     def format_data(self):
-        return (180 / 65535) * self.data_to_unsigned_int(self.data)
+        return (180 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 17
@@ -179,7 +182,7 @@ class SensorVerticalFieldOfView(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_VERTICAL_FOV
 
     def format_data(self):
-        return (180 / 65535) * self.data_to_unsigned_int(self.data)
+        return (180 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 18
@@ -200,7 +203,7 @@ class SensorRelativeElevationAngle(Metadata):
 
     def format_data(self):
         if self.data.hex() == 80000000:
-            return "Reserved"
+            return _RESERVED
         return (360 / 4294967294) * self.data_to_signed_int(self.data)
 
 
@@ -231,7 +234,7 @@ class TargetWidth(Metadata):
         self.key_type = UasDatalinkLocalSet.TARGET_WIDTH
 
     def format_data(self):
-        return (10000 / 65535) * self.data_to_unsigned_int(self.data)
+        return (10000 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 23
@@ -266,7 +269,7 @@ class FrameCenterElevationConversion(Metadata):
 
     # Default LS_dec
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 26
@@ -278,7 +281,7 @@ class OffsetCornerLatitudePoint1Conversion(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 27
@@ -290,7 +293,7 @@ class OffsetCornerLongitudePoint1Conversion(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 28
@@ -302,7 +305,7 @@ class OffsetCornerLatitudePoint2(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 29
@@ -314,7 +317,7 @@ class OffsetCornerLongitudePoint2(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 30
@@ -326,7 +329,7 @@ class OffsetCornerLatitudePoint3(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 31
@@ -338,7 +341,7 @@ class OffsetCornerLongitudePoint3(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 32
@@ -350,7 +353,7 @@ class OffsetCornerLatitudePoint4(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 33
@@ -362,7 +365,7 @@ class OffsetCornerLongitudePoint4(Metadata):
     def format_data(self):
         if self.data.hex() == 8000:
             return _NA_OFF_EARTH
-        return (0.15 / 65534) * self.data_to_signed_int(self.data)
+        return (0.15 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 34
@@ -379,7 +382,7 @@ class WindDirection(Metadata):
         self.key_type = UasDatalinkLocalSet.WIND_DIRECTION
 
     def format_data(self):
-        return (360 / 65535) * self.data_to_unsigned_int(self.data)
+        return (360 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 36
@@ -399,7 +402,7 @@ class StaticPressure(Metadata):
         self.key_type = UasDatalinkLocalSet.STATIC_PRESSURE
 
     def format_data(self):
-        return (5000 / 65535) * self.data_to_unsigned_int(self.data)
+        return (5000 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 38
@@ -409,7 +412,7 @@ class DensityAltitude(Metadata):
         self.key_type = UasDatalinkLocalSet.DENSITY_ALTITUDE
 
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 39
@@ -453,7 +456,7 @@ class TargetLocationElevation(Metadata):
         self.key_type = UasDatalinkLocalSet.TARGET_LOCATION_ELEVATION
 
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 43
@@ -483,7 +486,7 @@ class TargetErrorEstimateCE90(Metadata):
         self.key_type = UasDatalinkLocalSet.TARGET_ERROR_ESTIMATE_CE90
 
     def format_data(self):
-        return (4095 / 65535) * self.data_to_unsigned_int(self.data)
+        return (4095 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 46
@@ -493,7 +496,7 @@ class TargetErrorEstimateLE90(Metadata):
         self.key_type = UasDatalinkLocalSet.TARGET_ERROR_ESTIMATE_LE90
 
     def format_data(self):
-        return (4095 / 65535) * self.data_to_unsigned_int(self.data)
+        return (4095 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 47
@@ -524,7 +527,7 @@ class DifferentialPressure(Metadata):
         self.key_type = UasDatalinkLocalSet.DIFFERENTIAL_PRESSURE
 
     def format_data(self):
-        return (5000 / 65535) * self.data_to_unsigned_int(self.data)
+        return (5000 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 50
@@ -536,7 +539,7 @@ class PlatformAngleOfAttack(Metadata):
     def format_data(self):
         if self.data == 8000:
             return _OUT_OF_RANGE_STR
-        return (40 / 65534) * self.data_to_signed_int(self.data)
+        return (40 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 51
@@ -548,7 +551,7 @@ class PlatformVerticalSpeed(Metadata):
     def format_data(self):
         if self.data == 8000:
             return _OUT_OF_RANGE_STR
-        return (360 / 65534) * self.data_to_signed_int(self.data)
+        return (360 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 52
@@ -560,7 +563,7 @@ class PlatformSideslipAngle(Metadata):
     def format_data(self):
         if self.data == 8000:
             return _OUT_OF_RANGE_STR
-        return (40 / 65534) * self.data_to_signed_int(self.data)
+        return (40 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 53
@@ -570,7 +573,7 @@ class AirfieldBarometricPressure(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_SIDESLIP_ANGLE
 
     def format_data(self):
-        return (5000 / 65535) * self.data_to_unsigned_int(self.data)
+        return (5000 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 54
@@ -580,7 +583,7 @@ class AirfieldElevation(Metadata):
         self.key_type = UasDatalinkLocalSet.AIRFIELD_ELEVATION
 
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 55
@@ -620,7 +623,7 @@ class PlatformFuelRemaining(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_FUEL_REMAINING
 
     def format_data(self):
-        return (10000 / 65535) * self.data_to_unsigned_int(self.data)
+        return (10000 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 59
@@ -674,7 +677,7 @@ class PlatformMagneticHeading(Metadata):
         self.key_type = UasDatalinkLocalSet.PLATFORM_MAGNETIC_HEADING
 
     def format_data(self):
-        return (360 / 65535) * self.data_to_unsigned_int(self.data)
+        return (360 / _UINT_RANGE) * self.data_to_unsigned_int(self.data)
 
 
 # Item 65
@@ -718,7 +721,7 @@ class AlternatePlatformAltitude(Metadata):
         self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_ALTITUDE
 
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 70
@@ -735,7 +738,7 @@ class AlternatePlatformHeading(Metadata):
         self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_HEADING
 
     def format_data(self):
-        return (360 / 65535) * self.data_to_signed_int(self.data)
+        return (360 / _UINT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 72
@@ -775,7 +778,7 @@ class SensorEllipsoidHeight(Metadata):
         self.key_type = UasDatalinkLocalSet.SENSOR_ELLIPSOID_HEIGHT
 
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 76
@@ -785,7 +788,7 @@ class AlternatePlatformEllipsoidHeight(Metadata):
         self.key_type = UasDatalinkLocalSet.ALTERNATE_PLATFORM_ELLIPSOID_HEIGHT
 
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 77
@@ -802,7 +805,7 @@ class FrameCenterHeightAboveEllipsoid(Metadata):
         self.key_type = UasDatalinkLocalSet.FRAME_CENTER_HEIGHT_ABOVE_ELLIPSOID
 
     def format_data(self):
-        return (19900 / 65535) * self.data_to_unsigned_int(self.data) - 900
+        return (19900 / _UINT_RANGE) * self.data_to_unsigned_int(self.data) - _OFFSET
 
 
 # Item 79
@@ -814,7 +817,7 @@ class SensorNorthVelocity(Metadata):
     def format_data(self):
         if self.data == 8000:
             return _OUT_OF_RANGE_STR
-        return (654 / 65534) * self.data_to_signed_int(self.data)
+        return (654 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 80
@@ -826,7 +829,7 @@ class SensorEastVelocity(Metadata):
     def format_data(self):
         if self.data == 8000:
             return "Out of Range`"
-        return (654 / 65534) * self.data_to_signed_int(self.data)
+        return (654 / _INT_RANGE) * self.data_to_signed_int(self.data)
 
 
 # Item 81
@@ -1402,6 +1405,25 @@ class Checksum(Metadata):
     def __init__(self, data, length, id):
         super().__init__(data, length, id)
         self.key_type = UasDatalinkLocalSet.CHECKSUM
+
+    def format_data(self):
+        return self.data_to_unsigned_int(self.data)
+
+    def calculate_checksum(self):
+        bcc = 0
+        for i in range(self.length):
+            bcc += self.data[i] << (8 * ((i + 1) % 2))
+        return bcc
+
+    def validate_checksum(self):
+        if len(self.data) < 3:
+            raise ValueError("Checksum data is too short")
+
+        received_checksum = self.data
+
+        calculated_checksum = self.calculate_checksum()
+
+        return calculated_checksum == received_checksum
 
 
 class_map = {
